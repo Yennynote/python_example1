@@ -1,45 +1,45 @@
 import pygame
 
-
-def dispay_start_screen():  # 시작 버튼은 다음과 같이 실행한다.
-<<<<<<< HEAD
-    pygame.draw.circle(screen, GREEN, start_button.center, 60, 5)  # 시작 버튼 설정 값
-=======
-    pygame.draw.circle(screen, WHITE, start_button.center, 60, 5)  # 시작 버튼 설정 값
->>>>>>> parent of 7b8a9c9 (함수를 만들었는데 밑줄이 생기면서 문제가 생겼다고 떴음)
+# 시작 화면 보여주기
 
 
-pygame.init()  # 파이게임을 생성한다.
-screen_width = 1280  # 스크린의 가로 길이 설정값
-screen_height = 720  # 스크린의 세로 길이 설정값
-<<<<<<< HEAD
-screen = pygame.display.set_mode(
-    (screen_width, screen_height))  # 오른쪽 값을 왼쪽 스크린에 집어넣겠다는 의미인가?
-=======
-screen = pygame.display.set_mode((screen_width, screen_height))  # 오른쪽 값을 왼쪽 스크린에 집어넣겠다는 의미인가?
->>>>>>> parent of 7b8a9c9 (함수를 만들었는데 밑줄이 생기면서 문제가 생겼다고 떴음)
-pygame.display.set_caption("Memory Game")  # 게임을 나타낼 캡션 이름 설정
+def display_start_screen():
+    pygame.draw.circle(screen, WHITE, start_button.center, 60, 5)
+    # 흰색으로 동그라미를 그리는데 중심좌표는 start_button 의 중심좌표를 따라가고,
+    # 반지름은 60, 선 두께는 5
 
+
+# 초기화
+pygame.init()
+screen_width = 1280  # 가로 크기
+screen_height = 720  # 세로 크기
+screen = pygame.display.set_mode((screen_width, screen_height))
+pygame.display.set_caption("Memory Game")
+
+# 시작 버튼
 start_button = pygame.Rect(0, 0, 120, 120)
-start_button.center = (120, screen_height - 120)  # x, y 좌표 값
+start_button.center = (120, screen_height - 120)
 
-BLACK = (0, 0, 0)  # 바탕화면 색
-<<<<<<< HEAD
-GREEN = (89, 184, 149)  # 시작 버튼 색
-=======
-WHITE = (255, 255, 255)  # 시작 버튼 색
->>>>>>> parent of 7b8a9c9 (함수를 만들었는데 밑줄이 생기면서 문제가 생겼다고 떴음)
+# 색깔
+BLACK = (0, 0, 0)  # RGB
+WHITE = (255, 255, 255)
 
+# 게임 루프
+running = True  # 게임이 실행중인가?
+while running:
+    # 이벤트 루프
+    for event in pygame.event.get():  # 어떤 이벤트가 발생하였는가?
+        if event.type == pygame.QUIT:  # 창이 닫히는 이벤트인가?
+            running = False  # 게임이 더 이상 실행중이 아님
 
-running = True  # 게임이 실행되는가?
-while running:  # 실행되고 있을 때
-    for event in pygame.event.get():  # 파이게임 이벤트 안에 이벤트가 발생했는가?
-        if event.type == pygame.QUIT:  # 이벤트 타입이 그만해를 실행한다면?
-            running = False  # False 값을 통해 게임에서 나오도록 한다.
+    # 화면 전체를 까맣게 칠함
+    screen.fill(BLACK)
 
-    screen.fill(BLACK)  # 스크린은 이 색으로 채운다.
-    dispay_start_screen()
+    # 시작 화면 표시
+    display_start_screen()
+
+    # 화면 업데이트
     pygame.display.update()
 
-
-pygame.quit()  # 게임 종료 실행
+# 게임 종료
+pygame.quit()

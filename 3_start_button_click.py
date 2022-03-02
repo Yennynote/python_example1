@@ -1,38 +1,73 @@
 import pygame
 
-
-def dispay_start_screen():  # 시작 버튼은 다음과 같이 실행한다.
-    pygame.draw.circle(screen, WHITE, start_button.center, 60, 5)  # 시작 버튼 설정 값
+# 시작 화면 보여주기
 
 
-pygame.init()  # 파이게임을 생성한다.
-screen_width = 1280  # 스크린의 가로 길이 설정값
-screen_height = 720  # 스크린의 세로 길이 설정값
-screen = pygame.display.set_mode((screen_width, screen_height))  # 오른쪽 값을 왼쪽 스크린에 집어넣겠다는 의미인가?
-pygame.display.set_caption("Memory Game")  # 게임을 나타낼 캡션 이름 설정
+def display_start_screen():
+    pygame.draw.circle(screen, WHITE, start_button.center, 60, 5)
+    # 흰색으로 동그라미를 그리는데 중심좌표는 start_button 의 중심좌표를 따라가고,
+    # 반지름은 60, 선 두께는 5
 
+# 게임 화면 보여주기
+
+
+def display_game_screen():
+    print("Game Start")
+
+# pos 에 해당하는 버튼 확인
+
+
+def check_buttons(pos):
+    global start
+    if start_button.collidepoint(pos):
+        start = True
+
+
+# 초기화
+pygame.init()
+screen_width = 1280  # 가로 크기
+screen_height = 720  # 세로 크기
+screen = pygame.display.set_mode((screen_width, screen_height))
+pygame.display.set_caption("Memory Game")
+
+# 시작 버튼
 start_button = pygame.Rect(0, 0, 120, 120)
-start_button.center = (120, screen_height - 120)  # x, y 좌표 값
+start_button.center = (120, screen_height - 120)
 
-BLACK = (0, 0, 0)  # 바탕화면 색
-WHITE = (255, 255, 255)  # 시작 버튼 색
+# 색깔
+BLACK = (0, 0, 0)  # RGB
+WHITE = (255, 255, 255)
 
+# 게임 시작 여부
 start = False
 
-running = True  # 게임이 실행되는가?
-while running:  # 실행되고 있을 때
-    for event in pygame.event.get():  # 파이게임 이벤트 안에 이벤트가 발생했는가?
-        if event.type == pygame.QUIT:  # 이벤트 타입이 그만해를 실행한다면?
-            running = False  # False 값을 통해 게임에서 나오도록 한다.
+# 게임 루프
+running = True  # 게임이 실행중인가?
+while running:
+    click_pos = None
 
-    screen.fill(BLACK)  # 스크린은 이 색으로 채운다.
+    # 이벤트 루프
+    for event in pygame.event.get():  # 어떤 이벤트가 발생하였는가?
+        if event.type == pygame.QUIT:  # 창이 닫히는 이벤트인가?
+            running = False  # 게임이 더 이상 실행중이 아님
+        elif event.type == pygame.MOUSEBUTTONUP:  # 사용자가 마우스를 클릭했을때
+            click_pos = pygame.mouse.get_pos()
+            print(click_pos)
+
+    # 화면 전체를 까맣게 칠함
+    screen.fill(BLACK)
 
     if start:
-        display_game_screen()
+        display_game_screen()  # 게임 화면 표시
     else:
         display_start_screen()  # 시작 화면 표시
 
+    # 사용자가 클릭한 좌표값이 있다면 (어딘가 클릭했다면)
+    if click_pos:
+        check_buttons(click_pos)
+
+    # 화면 업데이트
     pygame.display.update()
 
-
-pygame.quit()  # 게임 종료 실행
+# 게임 종료
+pygame.quit()
