@@ -2,34 +2,22 @@ import pygame
 
 
 def dispay_start_screen():  # 시작 버튼은 다음과 같이 실행한다.
-<<<<<<< HEAD
-    pygame.draw.circle(screen, GREEN, start_button.center, 60, 5)  # 시작 버튼 설정 값
-=======
     pygame.draw.circle(screen, WHITE, start_button.center, 60, 5)  # 시작 버튼 설정 값
->>>>>>> parent of 7b8a9c9 (함수를 만들었는데 밑줄이 생기면서 문제가 생겼다고 떴음)
 
 
 pygame.init()  # 파이게임을 생성한다.
 screen_width = 1280  # 스크린의 가로 길이 설정값
 screen_height = 720  # 스크린의 세로 길이 설정값
-<<<<<<< HEAD
-screen = pygame.display.set_mode(
-    (screen_width, screen_height))  # 오른쪽 값을 왼쪽 스크린에 집어넣겠다는 의미인가?
-=======
 screen = pygame.display.set_mode((screen_width, screen_height))  # 오른쪽 값을 왼쪽 스크린에 집어넣겠다는 의미인가?
->>>>>>> parent of 7b8a9c9 (함수를 만들었는데 밑줄이 생기면서 문제가 생겼다고 떴음)
 pygame.display.set_caption("Memory Game")  # 게임을 나타낼 캡션 이름 설정
 
 start_button = pygame.Rect(0, 0, 120, 120)
 start_button.center = (120, screen_height - 120)  # x, y 좌표 값
 
 BLACK = (0, 0, 0)  # 바탕화면 색
-<<<<<<< HEAD
-GREEN = (89, 184, 149)  # 시작 버튼 색
-=======
 WHITE = (255, 255, 255)  # 시작 버튼 색
->>>>>>> parent of 7b8a9c9 (함수를 만들었는데 밑줄이 생기면서 문제가 생겼다고 떴음)
 
+start = False
 
 running = True  # 게임이 실행되는가?
 while running:  # 실행되고 있을 때
@@ -38,7 +26,12 @@ while running:  # 실행되고 있을 때
             running = False  # False 값을 통해 게임에서 나오도록 한다.
 
     screen.fill(BLACK)  # 스크린은 이 색으로 채운다.
-    dispay_start_screen()
+
+    if start:
+        display_game_screen()
+    else:
+        display_start_screen()  # 시작 화면 표시
+
     pygame.display.update()
 
 
