@@ -17,6 +17,7 @@ start_button.center = (120, screen_height - 120)  # x, y 좌표 값
 BLACK = (0, 0, 0)  # 바탕화면 색
 WHITE = (255, 255, 255)  # 시작 버튼 색
 
+start = False
 
 running = True  # 게임이 실행되는가?
 while running:  # 실행되고 있을 때
@@ -25,7 +26,12 @@ while running:  # 실행되고 있을 때
             running = False  # False 값을 통해 게임에서 나오도록 한다.
 
     screen.fill(BLACK)  # 스크린은 이 색으로 채운다.
-    dispay_start_screen()
+
+    if start:
+        display_game_screen()
+    else:
+        display_start_screen()  # 시작 화면 표시
+
     pygame.display.update()
 
 
